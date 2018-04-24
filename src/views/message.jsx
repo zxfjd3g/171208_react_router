@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Route} from 'react-router-dom'
+
+import MessageDetail from './message-detail'
 
 export default class Message extends Component {
 
@@ -28,13 +30,37 @@ export default class Message extends Component {
     }, 1000)
   }
 
+  showDetail = (id) => {
+    this.props.history.push(`/home/message/${id}`)
+  }
+  showDetail2 = (id) => {
+    this.props.history.replace(`/home/message/${id}`)
+  }
+
   render () {
     return (
-      <ul>
-        {
-          this.state.messages.map((m, index) =><li key={index}><Link to='???'>{m.title}</Link></li> )
-        }
-      </ul>
+      <div>
+        <ul>
+          {/*/home/message/num*/}
+          {
+            this.state.messages.map((m, index) =>{
+              return (
+                <li key={index}>
+                  <Link to={`/home/message/${m.id}`}>{m.title}</Link>
+                  <button onClick={() => {this.showDetail(m.id)}}>查看详情(push)</button>
+                  <button onClick={() => {this.showDetail2(m.id)}}>查看详情(replace)</button>
+                </li>
+              )
+            } )
+          }
+        </ul>
+
+        <button onClick={() => this.props.history.goBack()}>回退</button>
+        <button onClick={() => this.props.history.goForward()}>前进</button>
+        <button onClick={() => this.props.history.push('/about')}>去about</button>
+        <hr/>
+        <Route path='/home/message/:id' component={MessageDetail}/>
+      </div>
     )
   }
 }
