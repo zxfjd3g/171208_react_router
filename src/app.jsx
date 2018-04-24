@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import {NavLink, Route, Switch, Redirect} from 'react-router-dom'
+import {Route, Switch, Redirect} from 'react-router-dom'
+import MyNavLink from './components/my-nav-link'
 import About from './views/about'
 import Home from './views/home'
 
@@ -18,8 +19,8 @@ export default class App extends Component {
           <div className="col-xs-2 col-xs-offset-2">
             <div className="list-group">
               {/*指定路由链接*/}
-              <NavLink className="list-group-item" activeClassName='activeClass' to="/about">About</NavLink>
-              <NavLink className="list-group-item" activeClassName='activeClass' to="/home">Home</NavLink>
+              <MyNavLink to="/about">About</MyNavLink>
+              <MyNavLink to="/home">Home</MyNavLink>
             </div>
           </div>
           <div className="col-xs-6">
